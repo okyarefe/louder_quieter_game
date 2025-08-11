@@ -181,7 +181,7 @@ class Game {
                 this.updateCurrentStreakLabel();
 
                 const emblemImg = this.domElements.animatedEmblem.querySelector('img');
-                if (emblemImg) { emblemImg.src = 'assets/check2.png'; }
+                if (emblemImg) { emblemImg.src = '/assets/check2.png'; }
                 if (this.domElements.animatedEmblem) { this.domElements.animatedEmblem.classList.add('success'); }
 
                 const leftImage = document.querySelector('.left-image');
@@ -205,7 +205,7 @@ class Game {
                     if (this.domElements.animatedEmblem) {
                         this.domElements.animatedEmblem.classList.remove('success');
                         const emblemImg2 = this.domElements.animatedEmblem.querySelector('img');
-                        if (emblemImg2) { emblemImg2.src = 'assets/NTi-Audio-1500-679.png'; }
+                        if (emblemImg2) { emblemImg2.src = '/assets/NTi-Audio-1500-679.png'; }
                     }
 
                     const newReferenceItem = this.currentQuestion;
@@ -240,7 +240,7 @@ class Game {
                 if (this.domElements.animatedEmblem) {
                     this.domElements.animatedEmblem.classList.add('failure');
                     const emblemImg3 = this.domElements.animatedEmblem.querySelector('img');
-                    if (emblemImg3) { emblemImg3.src = 'assets/wrongcross.png'; }
+                    if (emblemImg3) { emblemImg3.src = '/assets/wrongcross.png'; }
                 }
                 const finalStreak = this.currentStreak;
                 setTimeout(() => {
@@ -308,7 +308,7 @@ class Game {
             return;
         }
         const emblemImg = this.domElements.animatedEmblem.querySelector('img');
-        if (emblemImg) { emblemImg.src = 'assets/NTi-Audio-1500-679.png'; }
+        if (emblemImg) { emblemImg.src = '/assets/NTi-Audio-1500-679.png'; }
         this.updateUI();
     }
 
@@ -328,29 +328,29 @@ class Game {
         if (isOutOfQuestions) {
             message = '🎉 Congratulations! 🎉';
             subMessage = 'You\'ve completed all available questions!';
-            gifPath = 'assets/HS.gif';
+            gifPath = '/assets/HS.gif';
             gifMessage = 'You just broke the sound barrier... and the game. <span class="legend-text">LEGEND!</span>';
         } else if (isWin) {
             message = '🎉 Congratulations! 🎉';
             subMessage = `${this.currentQuestion.itemName} (${this.currentQuestion.dB} dB)`;
-            gifPath = 'assets/HS.gif';
+            gifPath = '/assets/HS.gif';
             gifMessage = 'You just broke the sound barrier... and the game. <span class="legend-text">LEGEND!</span>';
         } else {
             if (isNewHighScore) {
                 message = 'Oops! Wrong answer!';
-                gifPath = 'assets/HS.gif';
+                gifPath = '/assets/HS.gif';
                 gifMessage = 'You just broke the sound barrier... and the game. <span class="legend-text">LEGEND!</span>';
             } else if (streakToShow >= 16) {
                 message = 'Oops! Wrong answer!';
-                gifPath = 'assets/15-HS.gif';
+                gifPath = '/assets/15-HS.gif';
                 gifMessage = 'Wow! Almost perfect – just one decibel away from glory!';
             } else if (streakToShow >= 6) {
                 message = 'Oops! Wrong answer!';
-                gifPath = 'assets/6-15.gif';
+                gifPath = '/assets/6-15.gif';
                 gifMessage = 'You\'re halfway to acoustic greatness!';
             } else {
                 message = 'Oops! Wrong answer!';
-                gifPath = 'assets/0-5.gif';
+                gifPath = '/assets/0-5.gif';
                 gifMessage = 'Looks like your ears hit snooze!';
             }
             subMessage = `${this.currentQuestion.itemName} (${this.currentQuestion.dB}dB)`;
@@ -425,7 +425,7 @@ class Game {
             this.domElements.animatedEmblem.classList.remove('success', 'failure');
             this.domElements.animatedEmblem.classList.add('reset');
             const emblemImg = this.domElements.animatedEmblem.querySelector('img');
-            if (emblemImg) { emblemImg.src = 'assets/NTi-Audio-1500-679.png'; }
+            if (emblemImg) { emblemImg.src = '/assets/NTi-Audio-1500-679.png'; }
         }
         const leftImage = document.querySelector('.left-image');
         const rightImage = document.querySelector('.right-image');
