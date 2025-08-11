@@ -45,15 +45,5 @@ Then regenerate `js/utils/questions.js`:
 - Option B (Windows helper):
   - Double‑click `update_questions_and_start.vbs` to rebuild and launch the game.
 
-Details
-- Items are sorted by dB descending during generation.
-- The browser build expects `questions` to be available as a global constant when running from `file://`.
-
-## Contributing
-Contributions and improvements are welcome.
-- Fork the repo and create a feature branch.
-- Keep code clear and modular. The game is organized into `js/StorageManager.js`, `js/Player.js`, `js/Game.js`, `js/StartScreen.js` (exposed via globals for offline use).
-- Test by opening `index.html` directly and via `npm start`.
-- Submit a pull request with a concise description of changes and screenshots/GIFs for UI updates.
 
 
