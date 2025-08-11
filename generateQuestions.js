@@ -34,7 +34,7 @@ function generateQuestionsFromImages() {
                     questions.push({
                         itemName: formatNameWithSpaces(name),
                         dB: db,
-                        imagePath: `assets/images/${file}`
+                        imagePath: `/assets/images/${file}`
                     });
                 }
             }

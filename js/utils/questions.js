@@ -2,7 +2,7 @@ const questions = [
     {
         "itemName": "Ambulance Siren",
         "dB": "114",
-        "imagePath": "assets/images/Ambulance_Siren_114.png"
+        "imagePath": "/assets/images/Ambulance_Siren_114.png"
     },
     {
         "itemName": "Bagpipe",
