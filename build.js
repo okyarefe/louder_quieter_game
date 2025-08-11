@@ -40,7 +40,7 @@ function generateQuestionsFromImages() {
                     console.log(`Processing: ${name} (${db} dB)`);
                     
                     // Use forward slashes for web compatibility
-                    const imagePath = path.join('/', 'assets', 'images', file).replace(/\\/g, '/');
+                    const imagePath = path.join('assets', 'images', file).replace(/\\/g, '/');
                     
                     questions.push({
                         itemName: formatNameWithSpaces(name),
