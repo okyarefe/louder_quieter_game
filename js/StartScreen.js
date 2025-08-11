@@ -45,7 +45,7 @@ class StartScreen {
             <div class="start-screen-modal">
                 <div class="modal-content">
                     <div class="logo-container">
-                        <img src="./assets/loqicon.png" alt="Louder Quieter Game" class="logo">
+                        <img src="assets/loqicon.png" alt="Louder Quieter Game" class="logo">
                     </div>
                     <form id="startForm">
                         <div class="form-group">
