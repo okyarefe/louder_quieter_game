@@ -1,0 +1,3674 @@
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --main-blue: #1f618d;
+  --main-red: #e74c3c;
+  --main-green: #2ecc71;
+  --text-dark: #333;
+  --text-light: #666;
+  --background-light: #f8f9fa;
+  --border-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --modal-overlay: rgba(0, 0, 0, 0.8);
+} 
+
+/* Loading Indicator */
+.loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    z-index: 1000;
+    font-size: 18px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.start-screen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--modal-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 0 clamp(1rem, 2vw, 2rem);
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+ 
+}
+
+/* Add background logos */
+.start-screen-modal::before,
+.start-screen-modal::after {
+  content: '';
+  position: absolute;
+  width: clamp(150px, 25vw, 400px);
+  height: clamp(150px, 25vw, 400px);
+  background-image: url('./assets/NTi_Audio_CMYK-CH-weiss.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-blend-mode: normal;
+  mix-blend-mode: normal;
+  pointer-events: none;
+  z-index: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  filter: brightness(1.2) contrast(1.1);
+}
+
+.start-screen-modal::before {
+  left: clamp(2%, 5vw, 10%);
+}
+
+.start-screen-modal::after {
+  right: clamp(2%, 5vw, 10%);
+}
+
+.modal-content {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
+  border-radius: clamp(8px, 1.5vw, 20px);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  width: min(100vw, clamp(300px, 40vw, 600px));
+  height: auto;
+  max-height: 100vh;
+  overflow-y: auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  
+  
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.logo {
+  max-width: min(40%, clamp(150px, 25vw, 400px));
+  height: auto;
+  aspect-ratio: 1;
+  margin-bottom: clamp(1rem, 2vw, 2rem);
+}
+
+/* Remove old title styles */
+.modal-content h2 {
+  display: none;
+}
+
+.modal-content h2 .louder,
+.modal-content h2 .quieter,
+.modal-content h2 .game {
+  display: none;
+}
+
+.form-group {
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+  text-align: left;
+  position: relative;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: clamp(0.3rem, 0.8vw, 0.6rem);
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: clamp(0.9rem, 1.3vw, 1.4rem);
+  letter-spacing: 0.3px;
+  transition: color 0.3s ease;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+  width: 100%;
+  padding: clamp(0.4rem, 1vw, 1rem);
+  border: clamp(1px, 0.2vw, 2px) solid var(--border-color);
+  border-radius: clamp(4px, 0.8vw, 8px);
+  font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus {
+  border-color: var(--main-blue);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(31, 97, 141, 0.1);
+}
+
+.form-group input[type="text"]:hover,
+.form-group input[type="email"]:hover {
+  border-color: var(--main-blue);
+}
+
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+  margin-top: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.form-group.checkbox input[type="checkbox"] {
+  width: clamp(16px, 1.2vw, 20px);
+  height: clamp(16px, 1.2vw, 20px);
+  cursor: pointer;
+  accent-color: var(--main-blue);
+}
+
+.form-group.checkbox label {
+  margin-bottom: 0;
+  font-size: clamp(0.8rem, 1.1vw, 1.2rem);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: var(--main-blue);
+  color: white;
+  border: none;
+  padding: clamp(0.6rem, 1.2vw, 1.2rem) clamp(1.2rem, 2.5vw, 2.5rem);
+  border-radius: clamp(4px, 0.8vw, 8px);
+  font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+button[type="submit"]:disabled {
+  background-color: var(--text-light);
+  cursor: not-allowed;
+}
+
+button[type="submit"]:not(:disabled):hover {
+  background-color: #27ae60;
+}
+
+.high-scores-section {
+  margin-top: clamp(1rem, 2vw, 2rem);
+  padding-top: clamp(1rem, 2vw, 2rem);
+  border-top: clamp(1px, 0.1vw, 2px) solid var(--border-color);
+}
+
+.high-scores-section h3 {
+  color: var(--text-dark);
+  margin-bottom: clamp(0.8rem, 1.5vw, 1.5rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.8rem);
+}
+
+.high-score-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(0.6rem, 1.2vw, 1.2rem);
+  background-color: var(--background-light);
+  border-radius: clamp(6px, 1vw, 12px);
+  margin-bottom: clamp(0.4rem, 0.8vw, 0.8rem);
+  font-size: clamp(0.9rem, 1.2vw, 1.4rem);
+}
+
+.high-score-item .rank {
+  font-weight: bold;
+  color: var(--text-light);
+
+}
+
+.high-score-item .nickname {
+  color: var(--text-dark);
+}
+
+.high-score-item .streak {
+  color: var(--main-red);
+  font-weight: bold;
+}
+
+.no-scores {
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.good-luck-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background-color: rgba(46, 204, 113, 0.9);
+  color: white;
+  padding: clamp(1rem, 2vw, 2rem) clamp(1.5rem, 3vw, 3rem);
+  border-radius: clamp(8px, 1.5vw, 20px);
+  width: clamp(200px, 30vw, 600px);
+  font-size: clamp(1.2rem, 2vw, 3rem);
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.good-luck-popup.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.good-luck-popup .player-name {
+  color: var(--text-dark);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .modal-content {
+      padding: min(6vw, 1.5rem);
+      width: 95%;
+  }
+
+  .logo {
+      max-width: 150px;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"] {
+      padding: clamp(0.7rem, 3vw, 1rem);
+  }
+
+  button[type="submit"] {
+      padding: clamp(0.7rem, 3vw, 1rem) clamp(1.2rem, 4vw, 1.5rem);
+  }
+
+  .start-screen-modal::before,
+  .start-screen-modal::after {
+      width: 280px;
+      height: 280px;
+  }
+
+  .start-screen-modal::before {
+      left: 5%;
+  }
+
+  .start-screen-modal::after {
+      right: 5%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal-content {
+      padding: min(8vw, 1rem);
+      width: 98%;
+  }
+
+  .logo {
+      max-width: 120px;
+  }
+
+  .form-group label {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"] {
+      padding: clamp(0.6rem, 4vw, 0.9rem);
+  }
+
+  button[type="submit"] {
+      padding: clamp(0.6rem, 4vw, 0.9rem) clamp(1rem, 5vw, 1.3rem);
+  }
+
+  .start-screen-modal::before,
+  .start-screen-modal::after {
+      width: 200px;
+      height: 200px;
+  }
+
+  .start-screen-modal::before {
+      left: 2%;
+  }
+
+  .start-screen-modal::after {
+      right: 2%;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .start-screen-modal {
+      align-items: flex-start;
+      padding: 1rem;
+  }
+
+  .modal-content {
+      margin: 1rem auto;
+      max-height: calc(100vh - 2rem);
+  }
+
+  .form-group {
+      margin-bottom: min(1vw, 0.5rem);
+  }
+
+  .high-scores-section {
+      margin-top: min(1vw, 0.5rem);
+      padding-top: min(1vw, 0.5rem);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Feedback Modal Styles */
+.feedback-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--modal-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: min(2vw, 1rem);
+
+}
+
+.feedback-modal .modal-content {
+  background-color: #ffffff; /* Pure white background */
+  padding: min(2vw, 1.5rem);
+  border-radius: min(2vw, 12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: min(90vw, 500px);
+  width: 90%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+
+}
+
+.feedback-modal h2 {
+  font-size: clamp(1rem, 4vw, 1.8rem);
+  margin-bottom: min(1vw, 0.5rem);
+  color: #333333; /* Dark text for better contrast on white */
+  font-weight: 500;
+}
+
+.feedback-modal p {
+  font-size: clamp(0.8rem, 3vw, 1.2rem);
+  margin-bottom: min(1vw, 0.5rem);
+  line-height: 1.4;
+}
+
+.feedback-modal button {
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  padding: clamp(0.4rem, 2vw, 0.8rem) clamp(0.8rem, 3vw, 1.2rem);
+  margin-top: min(1vw, 0.5rem);
+}
+
+/* Landscape orientation specific styles */
+@media screen and (orientation: landscape) {
+  .feedback-modal .modal-content {
+      transform: scale(0.85);
+      transform-origin: center center;
+  }
+
+  .feedback-modal h2 {
+      font-size: clamp(0.9rem, 3vw, 1.5rem);
+  }
+
+  .feedback-modal p {
+      font-size: clamp(0.7rem, 2.5vw, 1rem);
+  }
+
+  .feedback-modal button {
+      font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+      padding: clamp(0.3rem, 1.5vw, 0.6rem) clamp(0.6rem, 2.5vw, 1rem);
+  }
+}
+
+/* For very small screens */
+@media screen and (max-width: 360px) {
+  .feedback-modal h2 {
+      font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+  }
+
+  .feedback-modal p {
+      font-size: clamp(0.7rem, 3vw, 0.9rem);
+  }
+
+  .feedback-modal button {
+      font-size: clamp(0.7rem, 3vw, 0.9rem);
+      padding: clamp(0.3rem, 1.5vw, 0.5rem) clamp(0.5rem, 2.5vw, 0.8rem);
+  }
+}
+
+/* For very small heights in landscape */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .feedback-modal .modal-content {
+      transform: scale(0.75);
+  }
+
+  .feedback-modal h2 {
+      font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+  }
+
+  .feedback-modal p {
+      font-size: clamp(0.6rem, 2vw, 0.8rem);
+  }
+
+  .feedback-modal button {
+      font-size: clamp(0.6rem, 2vw, 0.8rem);
+      padding: clamp(0.2rem, 1.2vw, 0.4rem) clamp(0.4rem, 2vw, 0.6rem);
+  }
+}
+
+/* Landscape Mode Styles */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .start-screen-modal {
+      padding: 0.5rem;
+  }
+
+  .modal-content {
+      padding: clamp(0.6rem, 2vw, 1rem);
+      width: min(95vw, 700px);
+      max-height: 95vh;
+      gap: min(1vw, 0.8rem);
+  }
+
+  .form-group {
+      margin-bottom: 0.5rem;
+  }
+
+  .form-group label {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      margin-bottom: 0.3rem;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"] {
+      padding: 0.4rem 0.8rem;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+  }
+
+  button[type="submit"] {
+      padding: 0.4rem 1rem;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+  }
+
+  .high-scores-section {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+  }
+
+  .high-score-item {
+      padding: 0.3rem 0.6rem;
+      margin-bottom: 0.3rem;
+      font-size: clamp(0.7rem, 2vw, 0.9rem);
+  }
+}
+
+/* For very small screens */
+@media screen and (max-width: 360px) {
+  .modal-content {
+      width: 98vw;
+      padding: 0.8rem;
+  }
+}
+
+/* For very small heights in landscape */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .modal-content {
+      padding: 0.5rem;
+      width: min(95vw, 800px);
+  }
+
+  .form-group {
+      margin-bottom: 0.4rem;
+  }
+
+  .form-group label {
+      font-size: clamp(0.8rem, 1.8vw, 1rem);
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"] {
+      padding: 0.3rem 0.6rem;
+      font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+  }
+
+  button[type="submit"] {
+      padding: 0.3rem 0.8rem;
+      font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+  }
+}
+
+/* Streak Labels */
+.high-streak-label,
+.current-streak-label {
+  position: fixed;
+  top: clamp(1rem, 2vw, 2rem);
+  padding: clamp(0.5rem, 1vw, 1rem) clamp(1rem, 2vw, 2rem);
+  border-radius: clamp(6px, 1vw, 12px);
+  color: white;
+  font-size: clamp(1.2rem, 1.8vw, 3rem);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 1rem);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+ 
+}
+
+.high-streak-label {
+  left: clamp(1rem, 2vw, 2rem);
+}
+
+.current-streak-label {
+  right: clamp(1rem, 2vw, 2rem);
+}
+
+.high-streak-label .streak-value,
+.current-streak-label .streak-value {
+  font-weight: bold;
+  color: white;
+}
+
+.high-streak-label .nickname {
+  color: white;
+  font-style: italic;
+}
+
+/* Responsive adjustments for streak labels */
+@media screen and (max-width: 768px) {
+  .high-streak-label,
+  .current-streak-label {
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      top: min(3vw, 1.2rem);
+      padding: clamp(0.3rem, 1.5vw, 0.6rem) clamp(0.6rem, 2vw, 1rem);
+  }
+
+  .high-streak-label {
+      left: min(3vw, 1.2rem);
+  }
+
+  .current-streak-label {
+      right: min(3vw, 1.2rem);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .high-streak-label,
+  .current-streak-label {
+      top: min(4vw, 1rem);
+      padding: clamp(0.3rem, 2vw, 0.5rem) clamp(0.5rem, 2.5vw, 0.8rem);
+  }
+
+  .high-streak-label {
+      left: min(4vw, 1rem);
+  }
+
+  .current-streak-label {
+      right: min(4vw, 1rem);
+  }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .high-streak-label,
+  .current-streak-label {
+      top: min(2vw, 0.8rem);
+      padding: clamp(0.2rem, 1vw, 0.4rem) clamp(0.4rem, 1.5vw, 0.6rem);
+  }
+
+  .high-streak-label {
+      left: min(2vw, 0.8rem);
+  }
+
+  .current-streak-label {
+      right: min(2vw, 0.8rem);
+  }
+} 
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--text-dark);
+  overflow: hidden;
+}
+/* Responsive Design System */
+
+/* Base Container */
+.responsive-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive Grid System */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Responsive Typography */
+.responsive-text {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.5;
+}
+
+.responsive-heading {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.responsive-subheading {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  line-height: 1.3;
+}
+
+/* Responsive Spacing */
+.responsive-padding {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.responsive-margin {
+  margin: clamp(1rem, 3vw, 2rem);
+}
+
+/* Responsive Images */
+.responsive-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.responsive-img-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  overflow: hidden;
+}
+
+.responsive-img-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive Buttons */
+.responsive-button {
+  padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1rem, 2.5vw, 2rem);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  border-radius: clamp(4px, 1vw, 8px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Game-specific button styles */
+.game-button {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  touch-action: manipulation !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.game-button.louder,
+.game-button.quieter {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Add disabled state styles */
+.game-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+/* Ensure buttons are clickable on touch devices */
+@media (hover: none) {
+  .game-button,
+  .game-button.louder,
+  .game-button.quieter {
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Responsive Cards */
+.responsive-card {
+  padding: clamp(1rem, 3vw, 2rem);
+  border-radius: clamp(8px, 2vw, 16px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Navigation */
+.responsive-nav {
+  padding: clamp(0.5rem, 2vw, 1rem);
+}
+
+.responsive-nav-item {
+  padding: clamp(0.5rem, 1.5vw, 1rem);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+}
+
+/* Responsive Forms */
+.responsive-form {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.responsive-input {
+  padding: clamp(0.5rem, 1.5vw, 1rem);
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  border-radius: clamp(4px, 1vw, 8px);
+}
+
+/* Media Queries */
+/* Small devices (phones) */
+@media screen and (max-width: 576px) {
+  .grid-2, .grid-3, .grid-4 {
+      grid-template-columns: 1fr;
+  }
+
+  .responsive-container {
+      padding: 0 0.5rem;
+  }
+}
+
+/* Medium devices (tablets) */
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  .grid-3, .grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large devices (desktops) */
+@media screen and (min-width: 769px) and (max-width: 992px) {
+  .grid-4 {
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra large devices (large desktops) */
+@media screen and (min-width: 993px) {
+  .responsive-container {
+      max-width: 1400px;
+  }
+}
+
+/* Landscape orientation */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .responsive-container {
+      padding: 0.5rem;
+  }
+
+  .responsive-padding {
+      padding: 0.5rem;
+  }
+
+  .responsive-margin {
+      margin: 0.5rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .responsive-container {
+      max-width: 100%;
+      padding: 0;
+  }
+
+  .responsive-button,
+  .responsive-nav {
+      display: none;
+  }
+}
+
+/* High-DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .responsive-img {
+      image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .responsive-card {
+      background-color: #1a1a1a;
+      color: #ffffff;
+  }
+
+  .responsive-input {
+      background-color: #2a2a2a;
+      color: #ffffff;
+      border-color: #3a3a3a;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+      animation: none !important;
+      transition: none !important;
+  }
+}
+
+/* Touch devices */
+@media (hover: none) {
+  .responsive-button:hover {
+      transform: none;
+  }
+}
+
+
+/* Base Modal Foundation - The blueprint all modals inherit */
+.feedback-modal,
+.game-over-modal {
+  /* Positioning - Always centered, always on top */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1000;
+  
+  /* Responsive sizing that works on ALL screens */
+  width: clamp(280px, 85vw, 900px);
+  min-height: clamp(200px, 25vh, 400px);
+  max-height: 85vh;
+  
+  /* Transform with scale for entrance animation */
+  transform: translate(-50%, -50%) scale(0.8);
+  
+  /* Visual foundation */
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: clamp(12px, 1.5vmin, 24px);
+  box-shadow: 0 clamp(8px, 1vmin, 20px) clamp(32px, 4vmin, 60px) rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(12px);
+  border: clamp(1px, 0.1vw, 2px) solid rgba(255, 255, 255, 0.2);
+  
+  /* Responsive padding that scales with screen */
+  padding: clamp(1rem, 3vmin, 2.5rem);
+  
+  /* Content handling */
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: center;
+  
+  /* Animation setup */
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============================================================================
+ FAILURE STATE VARIANTS
+ ============================================================================= */
+
+ .feedback-modal.failure,
+ .game-over-modal.failure {
+   /* Override base styles for failure */
+   background: transparent;
+   border: clamp(2px, 0.2vw, 4px) solid rgba(231, 76, 60, 0.3);
+   width: clamp(320px, 70vw, 800px);
+   padding: 0;
+   overflow: visible;
+   max-height: none;
+   min-height: 0;
+ 
+   height: auto;
+   display: inline-block;
+ }
+ 
+ .feedback-modal.failure .modal-content,
+ .game-over-modal.failure .modal-content {
+   background: rgba(255, 255, 255, 0.85);
+   border: 2px solid #e74c3c;
+   box-shadow: 0 4px 20px rgba(231, 76, 60, 0.2);
+   padding: clamp(1.5rem, 4vmin, 3rem);
+   border-radius: clamp(12px, 1.5vmin, 20px);
+   box-shadow: 0 clamp(8px, 1vmin, 20px) clamp(32px, 4vmin, 60px) rgba(0, 0, 0, 0.12);
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   overflow: visible;
+   word-wrap: break-word;
+   word-break: break-word;
+ }
+
+/* Add endgame image styles */
+.feedback-modal.failure .endgame-image,
+.game-over-modal.failure .endgame-image {
+    width: clamp(80px, 20vw, 200px);
+    height: auto;
+    margin-bottom: clamp(0.5rem, 1.5vmin, 1rem);
+    animation: fadeInScale 0.5s ease-out;
+    object-fit: contain;
+    max-width: 100%;
+}
+
+@keyframes fadeInScale {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments for endgame image */
+@media screen and (max-width: 768px) {
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(60px, 25vw, 150px);
+        margin-bottom: clamp(0.4rem, 1.2vmin, 0.8rem);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(50px, 30vw, 120px);
+        margin-bottom: clamp(0.3rem, 1vmin, 0.6rem);
+    }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(40px, 15vh, 100px);
+        margin-bottom: clamp(0.2rem, 0.8vmin, 0.4rem);
+    }
+}
+
+/* For very small screens */
+@media screen and (max-width: 360px) {
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(40px, 35vw, 100px);
+        margin-bottom: clamp(0.2rem, 0.8vmin, 0.4rem);
+    }
+}
+
+/* For very small heights in landscape */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(30px, 12vh, 80px);
+        margin-bottom: clamp(0.2rem, 0.6vmin, 0.3rem);
+    }
+}
+
+/* For large screens */
+@media screen and (min-width: 1920px) {
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(100px, 15vw, 250px);
+        margin-bottom: clamp(0.8rem, 2vmin, 1.5rem);
+    }
+}
+
+/* For ultra-wide screens */
+@media screen and (min-width: 2560px) {
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(120px, 12vw, 300px);
+        margin-bottom: clamp(1rem, 2.5vmin, 2rem);
+    }
+}
+
+/* Show state - When modal becomes visible */
+.feedback-modal.show,
+.game-over-modal.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* =============================================================================
+ SUCCESS STATE VARIANTS
+ ============================================================================= */
+
+.feedback-modal.success,
+.game-over-modal.success {
+  /* Override base styles for success */
+  background: transparent;
+  border: clamp(2px, 0.2vw, 4px) solid rgba(46, 204, 113, 0.3);
+  width: clamp(320px, 70vw, 800px);
+  padding: 0; /* Content will handle padding */
+  overflow: visible;
+  max-height: none;
+}
+
+.feedback-modal.success .modal-content,
+.game-over-modal.success .modal-content {
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid #2ecc71;
+  box-shadow: 0 4px 20px rgba(46, 204, 113, 0.2);
+  padding: clamp(1.5rem, 4vmin, 3rem);
+  border-radius: clamp(12px, 1.5vmin, 20px);
+  box-shadow: 0 clamp(8px, 1vmin, 20px) clamp(32px, 4vmin, 60px) rgba(0, 0, 0, 0.12);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+
+
+/* =============================================================================
+ TYPOGRAPHY SYSTEM - Scales beautifully across all devices
+ ============================================================================= */
+
+.feedback-modal h2,
+.game-over-modal h2 {
+  font-size: clamp(1.7rem, 4.5vmin, 3.5rem);
+  margin-bottom: clamp(0.5rem, 2vmin, 1.5rem);
+  color: #333333;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-align: center;
+  width: 100%;
+}
+
+.feedback-modal .sub-message,
+.game-over-modal .sub-message {
+  font-size: clamp(1.2rem, 2.5vmin, 1.6rem);
+  margin-bottom: clamp(1rem, 3vmin, 2rem);
+  color: #333333;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  
+  
+  /* Base sub-message styling */
+  padding: clamp(0.8rem, 2vmin, 1.5rem) clamp(1rem, 2.5vmin, 2rem);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: clamp(8px, 1vmin, 16px);
+  box-shadow: 0 clamp(4px, 0.5vmin, 15px) clamp(15px, 2vmin, 30px) rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  
+  /* Responsive width */
+  max-width: min(100%, 500px);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Success sub-message variant */
+.feedback-modal.success .sub-message,
+.game-over-modal.success .sub-message {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(46, 204, 113, 0.08));
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  color: rgba(0, 0, 0, 0.85);
+  transform: scale(1.02);
+  box-shadow: 0 clamp(4px, 0.5vmin, 20px) clamp(20px, 2.5vmin, 40px) rgba(46, 204, 113, 0.15);
+}
+
+/* Failure sub-message variant */
+.feedback-modal.failure .sub-message,
+.game-over-modal.failure .sub-message {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(231, 76, 60, 0.08));
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  color: #e74c3c;
+  transform: scale(1.02);
+  box-shadow: 0 clamp(4px, 0.5vmin, 20px) clamp(20px, 2.5vmin, 40px) rgba(231, 76, 60, 0.15);
+}
+
+/* =============================================================================
+ INTERACTIVE ELEMENTS - Buttons, animations, etc.
+ ============================================================================= */
+
+.feedback-modal .next-round,
+.game-over-modal .next-round {
+  font-size: clamp(0.9rem, 2vmin, 1.3rem);
+  color: var(--main-blue);
+  margin-top: clamp(1rem, 2.5vmin, 1.8rem);
+  font-weight: 500;
+  animation: fadeInOut 1.5s infinite;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.game-over-modal .score-display {
+  
+  font-size: clamp(1rem, 2.5vmin, 2rem);
+  overflow: hidden;
+}
+
+.game-over-modal .score {
+  font-weight: bold;
+  color: var(--main-blue);
+  font-size: clamp(1.4rem, 3.5vmin, 2.5rem);
+ 
+}
+
+.game-over-modal .perfect-score {
+  color: var(--main-green);
+  font-weight: bold;
+  margin-top: clamp(0.5rem, 1.5vmin, 1rem);
+  text-transform: uppercase;
+  background-color: var(--main-blue);
+  padding: clamp(0.5rem, 1.5vmin, 1rem) clamp(1rem, 2.5vmin, 1.5rem);
+  border-radius: 50px;
+  font-size: clamp(0.8rem, 2vmin, 1.3rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.game-over-modal .play-again-btn {
+  background-color: var(--main-blue);
+  color: white;
+  border: none;
+  padding: clamp(0.6rem, 2vmin, 1.2rem) clamp(1.2rem, 3vmin, 2.5rem);
+  border-radius: 50px;
+  font-size: clamp(0.9rem, 2.2vmin, 1.4rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: clamp(1rem, 2.5vmin, 1.5rem);
+ 
+  /* Touch-friendly sizing */
+  min-height: clamp(44px, 6vmin, 60px);
+  min-width: clamp(100px, 20vmin, 200px);
+}
+
+.game-over-modal .play-again-btn:hover {
+  background-color: #1a5276;
+  transform: translateY(-2px);
+  box-shadow: 0 clamp(4px, 0.5vmin, 8px) clamp(16px, 2vmin, 24px) rgba(0, 0, 0, 0.2);
+}
+
+.high-score-celebration {
+  background-color: var(--main-green);
+  color: black;
+  font-size: clamp(0.9rem, 2.2vmin, 1.6rem);
+  padding: clamp(0.5rem, 1.5vmin, 1rem) clamp(1rem, 2.5vmin, 1.5rem);
+  border-radius: 50px;
+  
+  font-weight: bold;
+  animation: celebrate 1s ease infinite;
+}
+
+@keyframes celebrate {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.legend-text {
+  color: #2ecc71;  /* Bright green color */
+  font-weight: 800;
+  font-size: 1.2em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Remove the pulse animation keyframes since we're not using it anymore */
+
+/* =============================================================================
+ RESPONSIVE BREAKPOINTS - Fine-tuned for different screen categories
+ ============================================================================= */
+
+/* Small screens (phones) */
+@media screen and (max-width: 480px) {
+  .feedback-modal,
+  .game-over-modal {
+      width: 95vw;
+      min-height: 40vh;
+      max-height: 90vh;
+      padding: 1.5rem;
+  }
+  
+  .feedback-modal.success,
+  .game-over-modal.success,
+  .feedback-modal.failure,
+  .game-over-modal.failure {
+      width: 95vw;
+  }
+}
+
+/* Large screens (4K, big TVs) */
+@media screen and (min-width: 1921px) {
+  .feedback-modal,
+  .game-over-modal {
+      width: clamp(600px, 35vw, 900px);
+      min-height: clamp(400px, 20vh, 600px);
+      max-height: 70vh;
+      
+ 
+    
+  }
+  
+  .feedback-modal.success,
+  .game-over-modal.success,
+  .feedback-modal.failure,
+  .game-over-modal.failure {
+      width: clamp(30vw, 40vw, 1000px);
+  }
+
+}
+
+
+
+/* Ultra-wide screens */
+@media screen and (min-aspect-ratio: 21/9) {
+  .feedback-modal,
+  .game-over-modal {
+      width: clamp(600px, 45vw, 1200px);
+      
+  }
+  
+  .feedback-modal.success,
+  .game-over-modal.success,
+  .feedback-modal.failure,
+  .game-over-modal.failure {
+      width: clamp(600px, 45vw, 1200px);
+    
+  }
+}
+
+@keyframes celebrate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay without blur */
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+}
+
+/* Mobile Specific Modal Styles */
+@media screen and (max-width: 768px) {
+  .feedback-modal,
+  .game-over-modal {
+      padding: clamp(0.8rem, 3vw, 1.2rem);
+      width: min(95vw, 400px);
+      max-height: 85vh;
+  }
+
+  .feedback-modal h2,
+  .game-over-modal h2 {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      margin-bottom: 0.8rem;
+  }
+
+  .feedback-modal .sub-message,
+  .game-over-modal .sub-message {
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
+      padding: 0.6rem 1rem;
+  }
+
+  .game-over-modal .play-again-btn {
+      width: 50%;
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+  }
+}
+
+/* Landscape Mode Modal Styles */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .feedback-modal,
+  .game-over-modal {
+    width: min(90vw, 800px);
+    max-height: 90vh;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  .feedback-modal .modal-content,
+  .game-over-modal .modal-content {
+    padding: clamp(0.5rem, 2vw, 1rem);
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  .feedback-modal h2,
+  .game-over-modal h2 {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .feedback-modal .sub-message,
+  .game-over-modal .sub-message {
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    margin-bottom: 0.6rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .wrong-modal-wrapper {
+    flex-direction: row;
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+    padding: clamp(0.5rem, 1vw, 0.8rem);
+    align-items: center;
+  }
+
+  .wrong-wrapper {
+    flex: 1;
+    gap: clamp(0.3rem, 0.8vw, 0.5rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 35%;
+    min-width: 80px;
+    max-width: 150px;
+  }
+
+  .modal-buttons {
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .game-over-modal .play-again-btn,
+  .game-over-modal .back-home-btn {
+    padding: clamp(0.4rem, 1.5vmin, 0.8rem) clamp(1rem, 2vmin, 1.5rem);
+    font-size: clamp(0.8rem, 1.8vmin, 1.1rem);
+  }
+}
+
+/* For very small heights in landscape */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .feedback-modal,
+  .game-over-modal {
+    width: min(95vw, 700px);
+    padding: clamp(0.3rem, 1.5vw, 0.8rem);
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+
+  .feedback-modal .modal-content,
+  .game-over-modal .modal-content {
+    padding: clamp(0.3rem, 1.5vw, 0.8rem);
+  }
+
+  .feedback-modal h2,
+  .game-over-modal h2 {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .feedback-modal .sub-message,
+  .game-over-modal .sub-message {
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    margin-bottom: 0.4rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .wrong-modal-wrapper {
+    gap: clamp(0.3rem, 1vw, 0.6rem);
+    padding: clamp(0.3rem, 0.8vw, 0.5rem);
+  }
+
+  .wrong-wrapper {
+    gap: clamp(0.2rem, 0.6vw, 0.3rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 30%;
+    min-width: 60px;
+    max-width: 120px;
+  }
+
+  .modal-buttons {
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+  }
+
+  .game-over-modal .play-again-btn,
+  .game-over-modal .back-home-btn {
+    padding: clamp(0.3rem, 1.2vmin, 0.6rem) clamp(0.8rem, 1.8vmin, 1.2rem);
+    font-size: clamp(0.7rem, 1.6vmin, 0.9rem);
+  }
+}
+
+.feedback-modal.success .sub-message,
+.feedback-modal.failure .sub-message {
+  animation: pulseAnswer 0.5s ease-out;
+}
+
+@keyframes pulseAnswer {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1.02); }
+}
+
+/* Landscape Mode Success Modal Styles */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .feedback-modal.success,
+  .game-over-modal.success {
+      width: min(90vw, 600px);
+  }
+
+  .feedback-modal.success .modal-content,
+  .game-over-modal.success .modal-content {
+      padding: clamp(1rem, 2vw, 1.5rem);
+     
+  }
+
+  .feedback-modal.success h2,
+  .game-over-modal.success h2 {
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      margin-bottom: 0.8rem;
+  }
+
+  .feedback-modal.success .sub-message,
+  .game-over-modal.success .sub-message {
+      padding: 0.8rem;
+      font-size: clamp(0.8rem, 2.5vw, 1rem);
+      margin-bottom: 0.6rem;
+  }
+}
+
+
+/* For very small heights in landscape */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .feedback-modal.success,
+  .game-over-modal.success {
+      width: min(95vw, 700px);
+  }
+
+  .feedback-modal.success .modal-content,
+  .game-over-modal.success .modal-content {
+      padding: 0.8rem;
+  }
+
+  .feedback-modal.success h2,
+  .game-over-modal.success h2 {
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      margin-bottom: 0.6rem;
+  }
+
+  .feedback-modal.success .sub-message,
+  .game-over-modal.success .sub-message {
+      padding: 0.6rem;
+      font-size: clamp(0.7rem, 2vw, 0.9rem);
+      margin-bottom: 0.4rem;
+  }
+}
+
+/* Remove scrolling from congratulations screen */
+.feedback-modal.success .modal-content,
+.game-over-modal.success .modal-content {
+  overflow: visible;
+  max-height: none;
+}
+
+.feedback-modal.success .modal-content *,
+.game-over-modal.success .modal-content * {
+  overflow: visible;
+}
+
+/* Prevent horizontal scrollbars */
+.feedback-modal.failure .modal-content *,
+.game-over-modal.failure .modal-content * {
+  max-width: 100%;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Landscape Mode Failure Modal Styles */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .feedback-modal.failure,
+  .game-over-modal.failure {
+      width: min(90vw, 600px);
+  }
+
+  .feedback-modal.failure .modal-content,
+  .game-over-modal.failure .modal-content {
+      padding: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .feedback-modal.failure h2,
+  .game-over-modal.failure h2 {
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      margin-bottom: 0.8rem;
+  }
+
+  .feedback-modal.failure .sub-message,
+  .game-over-modal.failure .sub-message {
+      padding: 0.8rem;
+      font-size: clamp(0.8rem, 2.5vw, 1rem);
+      margin-bottom: 0.6rem;
+  }
+}
+
+/* For very small heights in landscape */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .feedback-modal.failure,
+  .game-over-modal.failure {
+      width: min(95vw, 700px);
+  }
+
+  .feedback-modal.failure .modal-content,
+  .game-over-modal.failure .modal-content {
+      padding: 0.8rem;
+  }
+
+  .feedback-modal.failure h2,
+  .game-over-modal.failure h2 {
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      margin-bottom: 0.6rem;
+  }
+
+  .feedback-modal.failure .sub-message,
+  .game-over-modal.failure .sub-message {
+      padding: 0.6rem;
+      font-size: clamp(0.7rem, 2vw, 0.9rem);
+      margin-bottom: 0.4rem;
+  }
+}
+
+/* Modal buttons container */
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: clamp(1rem, 2.5vmin, 1.5rem);
+
+ 
+}
+
+/* Back to Home button */
+.game-over-modal .back-home-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: clamp(0.6rem, 2vmin, 1.2rem) clamp(1.2rem, 3vmin, 2.5rem);
+  border-radius: 50px;
+  font-size: clamp(0.9rem, 2.2vmin, 1.4rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  /* Touch-friendly sizing */
+  min-height: clamp(44px, 6vmin, 60px);
+  min-width: clamp(100px, 20vmin, 200px);
+}
+
+.game-over-modal .back-home-btn:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 clamp(4px, 0.5vmin, 8px) clamp(16px, 2vmin, 24px) rgba(0, 0, 0, 0.2);
+}
+
+/* Update Play Again button margin since it's now in a container */
+.game-over-modal .play-again-btn {
+  margin-top: 0;
+}
+
+/* Responsive adjustments for buttons */
+@media screen and (max-width: 480px) {
+  .modal-buttons {
+      flex-direction: column;
+      gap: 0.5rem;
+  }
+  
+  .game-over-modal .play-again-btn,
+  .game-over-modal .back-home-btn {
+      width: 100%;
+      max-width: 300px;
+  }
+}
+
+/* Landscape mode adjustments */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .modal-buttons {
+      gap: 0.5rem;
+  }
+  
+  .game-over-modal .play-again-btn,
+  .game-over-modal .back-home-btn {
+      padding: clamp(0.4rem, 1.5vmin, 0.8rem) clamp(1rem, 2vmin, 1.5rem);
+      font-size: clamp(0.8rem, 1.8vmin, 1.1rem);
+  }
+} 
+
+.container{
+  width:100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: black;
+}
+
+
+img{
+  width: 100%;
+  object-fit: fill;
+  height: auto;
+  max-width:100%;
+}
+
+
+.top-left {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  max-width: 50%; /* Maximum width relative to viewport */
+
+  transform: translate(-100%, -100%); /* Move back by its own width and height */
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 50%;
+  right: 50%;
+  width: 30%;
+  max-width: 50%; /* Maximum width relative to viewport */
+  transform: translate(100%, 100%); /* Move forward by its own width and height */
+}
+
+.versus-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: clamp(5rem, 15vw, 12.5rem); /* Using rems instead of pixels */
+  height: clamp(5rem, 15vw, 12.5rem);
+  min-width: 3rem;
+  min-height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.versus-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.4));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+  }
+}
+
+
+
+.diagonal-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  background: linear-gradient(
+    to bottom,
+    transparent calc(50% - 6px),
+    white calc(50% - 6px),
+    white calc(50% + 6px),
+    transparent calc(50% + 6px)
+  );
+  transition: all 0.5s ease;
+}
+
+.diagonal-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent calc(50% - 8px),
+    #2ecc71 calc(50% - 8px),
+    #2ecc71 calc(50% + 8px),
+    transparent calc(50% + 8px)
+  );
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 2s ease-in-out;
+}
+
+.diagonal-line.success::after {
+  clip-path: inset(0 0 0 0);
+  filter: drop-shadow(0 0 8px rgba(46, 204, 113, 0.5));
+}
+
+.diagonal-line.failure::after {
+  background: linear-gradient(
+    to bottom,
+    transparent calc(50% - 8px),
+    #e74c3c calc(50% - 8px),
+    #e74c3c calc(50% + 8px),
+    transparent calc(50% + 8px)
+  );
+  clip-path: inset(0 0 0 0);
+  filter: drop-shadow(0 0 8px rgba(231, 76, 60, 0.5));
+}
+
+/* For landscape orientation */
+@media screen and (min-aspect-ratio: 1/1) {
+  .diagonal-line {
+    background: linear-gradient(
+      to right,
+      transparent calc(50% - 6px),
+      white calc(50% - 6px),
+      white calc(50% + 6px),
+      transparent calc(50% + 6px)
+    );
+  }
+  
+  .diagonal-line::after {
+    background: linear-gradient(
+      to right,
+      transparent calc(50% - 8px),
+      #2ecc71 calc(50% - 8px),
+      #2ecc71 calc(50% + 8px),
+      transparent calc(50% + 8px)
+    );
+    clip-path: inset(100% 0 0 0);
+  }
+
+  .diagonal-line.failure::after {
+    background: linear-gradient(
+      to right,
+      transparent calc(50% - 8px),
+      #e74c3c calc(50% - 8px),
+      #e74c3c calc(50% + 8px),
+      transparent calc(50% + 8px)
+    );
+  }
+}
+
+/* For portrait orientation */
+@media screen and (max-aspect-ratio: 1/1) {
+  .diagonal-line {
+    background: linear-gradient(
+      to bottom,
+      transparent calc(50% - 6px),
+      white calc(50% - 6px),
+      white calc(50% + 6px),
+      transparent calc(50% + 6px)
+    );
+  }
+  
+  .diagonal-line::after {
+    background: linear-gradient(
+      to bottom,
+      transparent calc(50% - 8px),
+      #2ecc71 calc(50% - 8px),
+      #2ecc71 calc(50% + 8px),
+      transparent calc(50% + 8px)
+    );
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+  position: absolute;
+  backdrop-filter: blur(8px);
+  padding: clamp(0.4rem, 1.5vh, 2vh) clamp(1.2rem, 2.5vw, 4vw);
+  border-radius: 50px;
+  color: var(--text-color);
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  z-index: 10;
+  white-space: normal;
+  transition: transform 0.3s var(--animation-timing), box-shadow 0.3s var(--animation-timing);
+  max-width: min(90vw, 40vw);
+  width: auto;
+  min-width: min(200px, 80vw);
+  
+}
+
+.item-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.item-name {
+  font-size: clamp(1.4rem, 3.5vh, 5vh);
+  margin-bottom: 0.25vh;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  white-space: normal;
+  padding: 0 0.5rem;
+}
+
+.item-db {
+  font-size: 7vw;
+  font-weight: 900;
+  color: #ffe066;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  font-family: monospace;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  min-width: 100px;
+}
+
+/* Position the labels */
+.top-left .item-info {
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom-right .item-info {
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.top-left img,
+.bottom-right img {
+  border-radius: 4px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  /* Apply portrait-style layout for mobile screens */
+  .top-left {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    width: 70%; /* Slightly wider for mobile to enhance visibility */
+    max-width: 400px;
+    transform: translate(-50%, -100%);
+  }
+
+  .bottom-right {
+    position: absolute;
+    top: 65%;
+    left: 50%; 
+    width: 70%;
+    max-width: 400px;
+    transform: translate(-50%, 0);
+  }
+  
+  /* Make the diagonal line horizontal */
+  .diagonal-line {
+    background: linear-gradient(
+      to bottom,
+      transparent calc(50% - 2px),
+      white calc(50% - 2px),
+      white calc(50% + 2px),
+      transparent calc(50% + 2px)
+    );
+  }
+  
+  /* Center the VS logo */
+  .versus-container {
+    width: clamp(3.75rem, 12vw, 8.75rem);
+    height: clamp(3.75rem, 12vw, 8.75rem);
+  }
+  
+  /* Fix the labels */
+  .top-left .item-info {
+    bottom: -50px;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .bottom-right .item-info {
+    top: -50px;
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Adjust game buttons for mobile */
+  .game-buttons-container {
+    margin-top: 1.5vh;
+  }
+
+  .item-info {
+    padding: clamp(0.3rem, 1.2vw, 0.8rem) clamp(0.8rem, 2vw, 1.5rem);
+    border-radius: 40px;
+    max-width: min(85vw, 300px);
+    min-width: min(180px, 70vw);
+  }
+
+  .item-name {
+    font-size: clamp(1.1rem, 2.5vh, 3.5vh);
+    line-height: 1.1;
+  }
+
+  .left-image, .right-image {
+    width: 100%;
+    height: 50%;
+  }
+
+  .item-db {
+    min-width: min(100px, 20vw);
+    max-width: min(100px, 20vw);
+    font-size: 5vw;
+  }
+}
+
+/* Even smaller mobile screens */
+@media screen and (max-width: 480px) {
+  .top-left {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  .bottom-right {
+    width: 80%;
+    max-width: 300px;
+  }
+  
+  .versus-container {
+    width: clamp(3rem, 10vw, 7.5rem);
+    height: clamp(3rem, 10vw, 7.5rem);
+  }
+  
+  /* Adjusted label spacing for smaller screens */
+  .top-left .item-info {
+    bottom: -40px;
+  }
+  
+  .bottom-right .item-info {
+    top: -40px;
+  }
+  
+  /* Further adjust game buttons */
+  .game-buttons-container {
+    margin-top: 1vh;
+  }
+  
+  .game-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    min-width: 100px;
+    width: 100%;
+  }
+
+  .diagonal-line {
+    background: linear-gradient(
+      to bottom,
+      transparent calc(50% - 2px),
+      white calc(50% - 2px),
+      white calc(50% + 2px),
+      transparent calc(50% + 2px)
+    );
+  }
+
+  .item-info {
+    padding: clamp(0.25rem, 1vw, 0.6rem) clamp(0.6rem, 1.8vw, 1.2rem);
+    border-radius: 30px;
+    max-width: min(80vw, 250px);
+    min-width: min(150px, 60vw);
+  }
+
+  .item-name {
+    font-size: clamp(1rem, 2.2vh, 3vh);
+    line-height: 1.1;
+  }
+
+  .left-image, .right-image {
+    width: 100%;
+    height: 50%;
+  }
+
+  .item-db {
+    min-width: min(80px, 25vw);
+    max-width: min(80px, 25vw);
+    font-size: 4.5vw;
+  }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .versus-container {
+    width: clamp(3rem, 10vh, 6.25rem);
+    height: clamp(3rem, 10vh, 6.25rem);
+  }
+
+  .item-info {
+    padding: 0.3rem 0.6rem;
+    max-width: min(75vw, 200px);
+    min-width: min(120px, 50vw);
+  }
+  
+  .top-left .item-info {
+    top: 2%;
+    bottom: auto;
+  }
+  
+  .bottom-right .item-info {
+    bottom: 2%;
+    top: auto;
+  }
+
+  .game-buttons-container {
+    margin-top: 1vh;
+  }
+
+  .diagonal-line {
+    background: linear-gradient(
+      to right,
+      transparent calc(50% - 2px),
+      white calc(50% - 2px),
+      white calc(50% + 2px),
+      transparent calc(50% + 2px)
+    );
+  }
+
+  .item-db {
+    min-width: min(90px, 15vw);
+    max-width: min(90px, 15vw);
+    font-size: 4vw;
+  }
+
+  .item-name {
+    font-size: clamp(0.9rem, 2vh, 2.5vh);
+    line-height: 1.1;
+  }
+}
+
+.game-buttons-container {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    width: 20vw;
+    max-width: 90vw;
+    margin-top: 1vh;
+    z-index: 10;
+}
+
+.game-button {
+    padding: clamp(0.6rem, 1.5vh, 2vh) clamp(1.2rem, 3vw, 4vw);
+    font-size: clamp(0.9rem, 1.8vh, 2.5vh);
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+
+/*
+.game-button:hover {
+    background-color: white;
+    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+    */
+
+.game-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+    
+
+.game-button.louder, .game-button.quieter {
+    background: transparent !important;
+    border: 3px solid #fff !important;
+    color: #ffe066 !important;
+    font-weight: bold;
+    border-radius: 2em !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: clamp(0.6rem, 1.4vmin, 1.7vmin) clamp(1.2rem, 2.8vmin, 3.5vmin);
+    flex-shrink: 0;
+    font-size: clamp(1.1rem, 2vmin, 2.8vmin);
+}
+
+/*
+.game-button.louder:hover, .game-button.quieter:hover {
+    background-color: white !important;
+    box-shadow: 0 0 0 3px #fff2, 0 6px 12px rgba(0,0,0,0.12);
+    border-color: #ffe066;
+    transform: translateY(-2px);
+}
+    */
+
+.game-button.louder:active, .game-button.quieter:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Media Queries for buttons */
+@media screen and (max-width: 768px) {
+    .game-buttons-container {
+        width: 250px;
+    }
+    
+    .game-button.louder, .game-button.quieter {
+        padding: clamp(0.4rem, 1vh, 1.2vh) clamp(0.8rem, 2vw, 2.5vw);
+        font-size: clamp(0.8rem, 1.5vh, 2vh);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .game-buttons-container {
+        width: 200px;
+    }
+    
+    .game-button.louder, .game-button.quieter {
+        padding: clamp(0.3rem, 0.8vh, 1vh) clamp(0.6rem, 1.8vw, 2vw);
+        font-size: clamp(0.7rem, 1.2vh, 1.8vh);
+    }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .game-buttons-container {
+        width: 180px;
+    }
+    
+    .game-button.louder, .game-button.quieter {
+        padding: clamp(0.3rem, 0.8vh, 1vh) clamp(0.6rem, 1.8vw, 2vw);
+        font-size: clamp(0.7rem, 1.2vh, 1.8vh);
+    }
+}
+
+/* For very large screens */
+@media screen and (min-width: 1920px) {
+    .game-buttons-container {
+        max-width: 40vw;
+        bottom: 3vh;
+        right: 3vw;
+    }
+
+    .game-button.louder, .game-button.quieter {
+        font-size: clamp(1.2rem, 2vmin, 2.5vmin);
+        padding: clamp(0.8rem, 1.5vmin, 2vmin) clamp(1.2rem, 2.5vmin, 3vmin);
+    }
+
+    .item-info {
+        max-width: 50vw;
+        padding: 2vh 3vw;
+    }
+
+    .item-name {
+        font-size: clamp(1rem, 2.5vh, 3vh);
+        line-height: 1.3;
+        padding: 0 1rem;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .versus-container {
+        width: clamp(7.5rem, 8vw, 12.5rem);
+        height: clamp(7.5rem, 8vw, 12.5rem);
+    }
+}
+
+/* For ultra-wide and 4K screens */
+@media screen and (min-width: 2560px) {
+    .game-buttons-container {
+        max-width: 35vw;
+        bottom: 4vh;
+        right: 4vw;
+    }
+
+    .game-button.louder, .game-button.quieter {
+        font-size: clamp(1.4rem, 2.5vmin, 3vmin);
+        padding: clamp(1rem, 2vmin, 2.5vmin) clamp(1.5rem, 3vmin, 3.5vmin);
+    }
+
+    .item-info {
+        max-width: 45vw;
+        padding: 2.5vh 3.5vw;
+    }
+
+    .item-name {
+        font-size: clamp(1.4rem, 3.5vh, 4.5vh);
+    }
+
+    
+
+    .versus-container {
+        width: clamp(9rem, 6vw, 15rem);
+        height: clamp(9rem, 6vw, 15rem);
+    }
+}
+
+@media screen and (max-aspect-ratio: 2/3) and (min-height: 1000px) {
+  /* For tall portrait screens like 1-1.5m vertical displays */
+  .top-left {
+    position: absolute;
+    top: 25%; /* Move to 25% from top */
+    left: 50%;
+    width: 80%; /* Make images take more width */
+    max-width: 90%;
+    height: 40vh; /* Take about 40% of screen height */
+    transform: translate(-50%, -50%); /* Center horizontally and vertically */
+  }
+  
+  .top-left img {
+    height: 100%; /* Make image fill the container height */
+    object-fit: contain; /* Maintain aspect ratio */
+  }
+  
+  .bottom-right {
+    position: absolute;
+    top: 75%; /* Position at 75% from top */
+    left: 50%; 
+    width: 80%;
+    max-width: 90%;
+    height: 40vh; /* Take about 40% of screen height */
+    transform: translate(-50%, -50%); /* Center horizontally and vertically */
+  }
+  
+  .bottom-right img {
+    height: 100%; /* Make image fill the container height */
+    object-fit: contain; /* Maintain aspect ratio */
+  }
+  
+  /* Make the diagonal line horizontal */
+  .diagonal-line {
+    background: linear-gradient(
+      to bottom,
+      transparent calc(50% - 2px),
+      white calc(50% - 2px),
+      white calc(50% + 2px),
+      transparent calc(50% + 2px)
+    );
+  }
+  
+  /* Center the VS logo */
+  .versus-container {
+    top: 50%;
+    left: 50%;
+    width: clamp(6rem, 15vw, 12.5rem);
+    height: clamp(6rem, 15vw, 12.5rem);
+    z-index: 20; /* Ensure it's above images */
+  }
+  
+  /* Fix the labels */
+  .top-left .item-info {
+    bottom: -60px; /* Position below the top image */
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    
+  
+  }
+  
+  .bottom-right .item-info {
+    top: -60px; /* Position above the bottom image */
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .game-buttons-container {
+    margin-top: 1.5vh;
+  }
+}
+.animated-emblem {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    animation: emblemPulse 1.5s infinite;
+    transition: background-color 0.3s ease;
+}
+
+.animated-emblem.reset {
+    background: #ffffff;
+    animation: emblemPulse 1.5s infinite;
+}
+
+.animated-emblem.success {
+    background: #2ecc71;
+    animation: none; /* Stop the pulse animation when success state is active */
+}
+
+.animated-emblem.failure {
+    background: #e74c3c;
+    animation: none; /* Stop the pulse animation when failure state is active */
+}
+
+.animated-emblem img {
+    width: 75%; /* Slightly reduced from 80% */
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.animated-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #0078d4;
+    border-radius: 50%;
+    top: 45%;  /* Adjusted to position over the 'i' */
+    left: 65%; /* Adjusted to position over the 'i' */
+    transform: translate(-50%, -50%);
+    animation: pulse 2s infinite;
+    z-index: 2;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes emblemPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Media Queries for the emblem */
+@media screen and (max-width: 768px) {
+    .versus-container {
+        width: clamp(3.75rem, 12vw, 8.75rem);
+        height: clamp(3.75rem, 12vw, 8.75rem);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .versus-container {
+        width: clamp(3rem, 10vw, 7.5rem);
+        height: clamp(3rem, 10vw, 7.5rem);
+    }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .versus-container {
+        width: clamp(3rem, 10vh, 6.25rem);
+        height: clamp(3rem, 10vh, 6.25rem);
+    }
+}
+
+/* For very large screens */
+@media screen and (min-width: 1920px) {
+    .versus-container {
+        width: clamp(10rem, 12vw, 15rem);
+        height: clamp(10rem, 12vw, 15rem);
+    }
+}
+
+.left-image, .right-image {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-image {
+  top: 0;
+}
+
+.right-image {
+  bottom: 0;
+}
+
+.left-image img, .right-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+/* Position the labels on the images */
+.left-image .item-info, .right-image .item-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  backdrop-filter: none;
+  padding: clamp(0.5rem, 2vw, 1rem) clamp(0.75rem, 3vw, 1.5rem);
+  border-radius: var(--border-radius);
+  color: #fff;
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  z-index: 10;
+  white-space: nowrap;
+  height: auto;
+  max-height: fit-content;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .left-image, .right-image {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .left-image, .right-image {
+    width: 100%;
+    height: 50%;
+  }
+  .left-image .item-info, .right-image .item-info {
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* For landscape orientation, switch to horizontal layout */
+@media screen and (min-aspect-ratio: 1/1) {
+  .left-image, .right-image {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+  }
+
+  .left-image {
+    left: 0;
+  }
+
+  .right-image {
+    right: 0;
+  }
+}
+
+/* Media Queries for mobile devices */
+@media screen and (max-width: 768px) {
+    .game-buttons-container {
+        bottom: 1rem;
+        right: 1rem;
+        max-width: min(50vw, 200px);
+        width: 50vw;
+        position: fixed;
+        z-index: 100;
+    }
+
+    .game-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        min-width: 100px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .game-buttons-container {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        max-width: min(60vw, 180px);
+        width: 60vw;
+        position: fixed;
+        z-index: 100;
+    }
+
+    .game-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        min-width: 100px;
+        width: 100%;
+    }
+}
+
+.high-score-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: min(1vw, 0.6rem);
+    background-color: var(--background-light);
+    border-radius: min(1.2vw, 6px);
+    margin-bottom: min(0.8vw, 0.4rem);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+}
+
+.high-score-item .rank {
+    font-weight: bold;
+    color: var(--text-light);
+    font-size: clamp(1.4rem, 3.5vmin, 2.5rem);
+ 
+}
+
+.high-score-item .nickname {
+    color: var(--text-dark);
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    font-weight: bold;
+}
+
+.high-score-item .streak {
+    color: var(--main-red);
+    font-weight: bold;
+}
+
+.high-scores-section h3 {
+    color: var(--main-blue) !important;
+    margin-bottom: min(1.5vw, 0.8rem);
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: whitesmoke;
+
+}
+
+/*
+.game-button.louder:hover, .game-button.quieter:hover {
+    background-color: white !important;
+    box-shadow: 0 0 0 3px #fff2, 0 6px 12px rgba(0,0,0,0.12);
+    border-color: #ffe066;
+}
+    
+
+.game-button.louder:hover .button-label,
+.game-button.quieter:hover .button-label,
+.game-button.louder:hover .button-arrow,
+.game-button.quieter:hover .button-arrow {
+    color: black !important;
+}*/
+
+/* For very small screens */
+@media screen and (max-width: 360px) {
+    .item-info {
+        padding: 0.2rem 0.5rem;
+        max-width: min(75vw, 180px);
+        min-width: min(100px, 55vw);
+    }
+
+    .item-name {
+        font-size: clamp(0.65rem, 1.5vh, 1.7vh);
+        line-height: 1.1;
+    }
+}
+
+/* Image Transition Animation */
+.left-image, .right-image {
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Portrait Mode Animation */
+@media screen and (max-aspect-ratio: 1/1) {
+    .left-image.slide-out {
+        /* Remove this animation - we want left image to stay in place */
+        transform: none;
+    }
+
+    .right-image.slide-up {
+        transform: translateY(-100%);
+    }
+
+    .right-image.slide-in-new {
+        animation: slideInFromBottom 0.5s ease-out forwards;
+    }
+}
+
+/* Landscape Mode Animation */
+@media screen and (min-aspect-ratio: 1/1) {
+    .left-image.slide-out {
+        /* Remove this animation - we want left image to stay in place */
+        transform: none;
+    }
+
+    .right-image.slide-up {
+        transform: translateX(-100%);
+    }
+
+    .right-image.slide-in-new {
+        animation: slideInFromRight 0.5s ease-out forwards;
+    }
+}
+
+/* Animation Classes */
+.slide-out {
+    opacity: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.slide-up {
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Reset animation classes */
+.reset-position {
+    transform: translate(0, 0) !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+/* New Slide In Animations */
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Portrait Mode Animations */
+@media screen and (max-aspect-ratio: 1/1) {
+    .left-image.slide-out {
+        /* Remove this animation - we want left image to stay in place */
+        transform: none;
+    }
+
+    .right-image.slide-up {
+        transform: translateY(-100%);
+    }
+
+    .right-image.slide-in-new {
+        animation: slideInFromBottom 0.5s ease-out forwards;
+    }
+}
+
+/* Landscape Mode Animations */
+@media screen and (min-aspect-ratio: 1/1) {
+    .left-image.slide-out {
+        /* Remove this animation - we want left image to stay in place */
+        transform: none;
+    }
+
+    .right-image.slide-up {
+        transform: translateX(-100%);
+    }
+
+    .right-image.slide-in-new {
+        animation: slideInFromRight 0.5s ease-out forwards;
+    }
+}
+
+/* Reset animation classes */
+.reset-position {
+    transform: translate(0, 0) !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+/* Surface Duo specific styles */
+@media screen and (width: 720px) and (height: 540px),
+       screen and (min-width: 720px) and (max-width: 720px) and (min-height: 540px) and (max-height: 540px) {
+  .diagonal-line {
+    background: linear-gradient(
+      to right,
+      transparent calc(50% - 2px),
+      white calc(50% - 2px),
+      white calc(50% + 2px),
+      transparent calc(50% + 2px)
+    ) !important;
+  }
+  
+  .diagonal-line.success {
+    background: linear-gradient(
+      to right,
+      transparent calc(50% - 8px),
+      #2ecc71 calc(50% - 8px),
+      #2ecc71 calc(50% + 8px),
+      transparent calc(50% + 8px)
+    ) !important;
+  }
+
+  .diagonal-line.failure {
+    background: linear-gradient(
+      to right,
+      transparent calc(50% - 8px),
+      #e74c3c calc(50% - 8px),
+      #e74c3c calc(50% + 8px),
+      transparent calc(50% + 8px)
+    ) !important;
+  }
+
+  /* Override any portrait-specific styles */
+  .diagonal-line[style*="to bottom"] {
+    background: linear-gradient(
+      to right,
+      transparent calc(50% - 2px),
+      white calc(50% - 2px),
+      white calc(50% + 2px),
+      transparent calc(50% + 2px)
+    ) !important;
+  }
+}
+
+/* 4K Display Optimizations */
+@media screen and (min-width: 3840px) {
+  .modal-content {
+    width: min(70vw, clamp(600px, 50vw, 1200px));
+    padding: 0 clamp(3rem, 4vw, 5rem);
+    border-radius: clamp(16px, 2vw, 30px);
+  }
+
+  .logo {
+    max-width: min(50%, clamp(300px, 30vw, 800px));
+    margin-bottom: clamp(2rem, 3vw, 4rem);
+  }
+
+  .form-group {
+    margin-bottom: clamp(1rem, 2vw, 2rem);
+  }
+
+  .form-group label {
+    font-size: clamp(1.4rem, 1.8vw, 2.2rem);
+    margin-bottom: clamp(0.6rem, 1vw, 1.2rem);
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"] {
+    padding: clamp(0.8rem, 1.5vw, 2rem);
+    font-size: clamp(1.2rem, 1.6vw, 2rem);
+    border-radius: clamp(8px, 1vw, 16px);
+  }
+
+  .form-group.checkbox {
+    gap: clamp(1rem, 1.5vw, 2rem);
+    margin-top: clamp(1rem, 2vw, 2.5rem);
+  }
+
+  .form-group.checkbox input[type="checkbox"] {
+    width: clamp(24px, 1.5vw, 32px);
+    height: clamp(24px, 1.5vw, 32px);
+  }
+
+  .form-group.checkbox label {
+    font-size: clamp(1.1rem, 1.4vw, 1.8rem);
+  }
+
+  button[type="submit"] {
+    padding: clamp(1rem, 2vw, 2.5rem) clamp(2rem, 3vw, 4rem);
+    font-size: clamp(1.2rem, 1.6vw, 2rem);
+    border-radius: clamp(8px, 1vw, 16px);
+    margin-top: clamp(1rem, 2vw, 2.5rem);
+  }
+
+  .high-scores-section {
+    margin-top: clamp(2rem, 3vw, 4rem);
+    padding-top: clamp(2rem, 3vw, 4rem);
+  }
+
+  .high-scores-section h3 {
+    font-size: clamp(1.4rem, 2vw, 2.5rem);
+    margin-bottom: clamp(1.2rem, 2vw, 2.5rem);
+  }
+
+  .high-score-item {
+    padding: clamp(1rem, 1.5vw, 2rem);
+    margin-bottom: clamp(0.8rem, 1.2vw, 1.5rem);
+    font-size: clamp(1.2rem, 1.6vw, 2rem);
+  }
+
+  .high-score-item .rank {
+    font-size: clamp(1.8rem, 2.2vw, 2.8rem);
+  }
+
+  .high-score-item .nickname {
+    font-size: clamp(1.4rem, 1.8vw, 2.2rem);
+  }
+
+  .high-score-item .streak {
+    font-size: clamp(1.4rem, 1.8vw, 2.2rem);
+  }
+}
+
+/* Vertical Screen Optimizations (1080x1920 and similar) */
+@media screen and (min-width: 1080px) and (max-aspect-ratio: 1/1) {
+  .start-screen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .start-screen-modal::before,
+  .start-screen-modal::after {
+    content: '';
+    position: absolute;
+    width: clamp(300px, 40vw, 700px);
+    height: clamp(300px, 40vw, 700px);
+    background-image: url('./assets/NTi_Audio_CMYK-CH-weiss.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-blend-mode: normal;
+    mix-blend-mode: normal;
+    pointer-events: none;
+    z-index: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .start-screen-modal::before {
+    top: 5%;
+  }
+
+  .start-screen-modal::after {
+    bottom: 5%;
+    top: auto;
+  }
+
+  .modal-content {
+    position: relative;
+    z-index: 1;
+    width: min(90vw, clamp(600px, 55vw, 1200px));
+    padding: clamp(2rem, 4vw, 5rem);
+    border-radius: clamp(16px, 2vw, 30px);
+    margin: 0 auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  .logo {
+    max-width: min(60%, clamp(300px, 35vw, 700px));
+    margin-bottom: clamp(2rem, 3vw, 4rem);
+  }
+
+  .form-group {
+    margin-bottom: clamp(1rem, 2vw, 2.5rem);
+  }
+
+  .form-group label {
+    font-size: clamp(1.3rem, 1.8vw, 2.2rem);
+    margin-bottom: clamp(0.6rem, 1vw, 1.2rem);
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"] {
+    padding: clamp(0.8rem, 1.5vw, 2rem);
+    font-size: clamp(1.2rem, 1.6vw, 2rem);
+    border-radius: clamp(8px, 1vw, 16px);
+  }
+
+  .form-group.checkbox {
+    gap: clamp(1rem, 1.5vw, 2rem);
+    margin-top: clamp(1rem, 2vw, 2.5rem);
+  }
+
+  .form-group.checkbox input[type="checkbox"] {
+    width: clamp(24px, 1.5vw, 32px);
+    height: clamp(24px, 1.5vw, 32px);
+  }
+
+  .form-group.checkbox label {
+    font-size: clamp(1.1rem, 1.4vw, 1.8rem);
+  }
+
+  button[type="submit"] {
+    padding: clamp(1rem, 2vw, 2.5rem) clamp(2rem, 3vw, 4rem);
+    font-size: clamp(1.2rem, 1.6vw, 2rem);
+    border-radius: clamp(8px, 1vw, 16px);
+    margin-top: clamp(1rem, 2vw, 2.5rem);
+  }
+
+  .high-scores-section {
+    margin-top: clamp(2rem, 3vw, 4rem);
+    padding-top: clamp(2rem, 3vw, 4rem);
+  }
+
+  .high-scores-section h3 {
+    font-size: clamp(1.4rem, 2vw, 2.5rem);
+    margin-bottom: clamp(1.2rem, 2vw, 2.5rem);
+  }
+
+  .high-score-item {
+    padding: clamp(1rem, 1.5vw, 2rem);
+    margin-bottom: clamp(0.8rem, 1.2vw, 1.5rem);
+    font-size: clamp(1.2rem, 1.6vw, 2rem);
+  }
+}
+
+.wrong-answer-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(200px, 30vw, 400px);
+ 
+    height: auto;
+    z-index: 1000;
+    animation: wrongAnswerPulse 0.5s ease-out;
+    pointer-events: none;
+}
+
+@keyframes wrongAnswerPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Media Queries for wrong answer image */
+
+@media screen and (max-width: 768px) {
+    .wrong-answer-image {
+        width: clamp(150px, 40vw, 300px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .wrong-answer-image {
+        width: clamp(120px, 50vw, 250px);
+    }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .wrong-answer-image {
+        width: clamp(100px, 30vh, 200px);
+    }
+}
+
+/* Surface Duo specific styles */
+@media screen and (width: 720px) and (height: 540px),
+       screen and (min-width: 720px) and (max-width: 720px) and (min-height: 540px) and (max-height: 540px) {
+  .feedback-modal,
+  .game-over-modal {
+    padding: 0.5rem;
+    width: min(95vw, 700px);
+    max-height: 95vh;
+    overflow: hidden;
+  }
+
+  .feedback-modal .modal-content,
+  .game-over-modal .modal-content {
+    padding: 0.5rem;
+    max-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .feedback-modal h2,
+  .game-over-modal h2 {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    margin-bottom: 0.3rem;
+  }
+
+  .feedback-modal .sub-message,
+  .game-over-modal .sub-message {
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    margin-bottom: 0.3rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .game-over-modal .score-display {
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    margin: 0.3rem 0;
+  }
+
+  .game-over-modal .score {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .modal-buttons {
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+  }
+
+  .game-over-modal .play-again-btn,
+  .game-over-modal .back-home-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    min-height: 36px;
+    min-width: 80px;
+  }
+
+  .item-info {
+    padding: 0.3rem 0.6rem;
+    max-width: min(75vw, 200px);
+    min-width: min(120px, 50vw);
+  }
+
+  .item-name {
+    font-size: clamp(0.7rem, 1.5vh, 1.8vh);
+    line-height: 1.1;
+  }
+
+  .item-db {
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+  }
+
+  .endgame-image {
+    width: clamp(100px, 30vh, 200px);
+    margin-bottom: 0.3rem;
+  }
+}
+.wrong-modal-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrong-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrong-modal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  width: 100%;
+  max-width: 100%;
+  padding: clamp(1rem, 2vw, 2rem);
+}
+
+.wrong-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Responsive adjustments for the wrong modal layout */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .wrong-modal-wrapper {
+    flex-direction: column;
+    gap: clamp(0.8rem, 2vw, 1.5rem);
+    padding: clamp(0.8rem, 1.5vw, 1.2rem);
+    align-items: center;
+  }
+
+  .wrong-wrapper {
+    gap: clamp(0.4rem, 1.2vw, 0.8rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 60%;
+    min-width: 150px;
+    max-width: 250px;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .wrong-modal-wrapper {
+    flex-direction: row;
+    gap: clamp(0.8rem, 2vw, 1.5rem);
+    padding: clamp(0.8rem, 1.5vw, 1.2rem);
+    align-items: center;
+  }
+
+  .wrong-wrapper {
+    flex: 1;
+    gap: clamp(0.4rem, 1.2vw, 0.8rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 45%;
+    min-width: 120px;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  .wrong-modal-wrapper {
+    gap: clamp(0.6rem, 1.5vw, 1rem);
+    padding: clamp(0.6rem, 1.2vw, 1rem);
+  }
+
+  .wrong-wrapper {
+    gap: clamp(0.3rem, 1vw, 0.6rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 50%;
+    min-width: 120px;
+    max-width: 200px;
+  }
+}
+
+@media screen and (max-width: 480px) and (orientation: landscape) {
+  .wrong-modal-wrapper {
+    gap: clamp(0.6rem, 1.5vw, 1rem);
+    padding: clamp(0.6rem, 1.2vw, 1rem);
+  }
+
+  .wrong-wrapper {
+    gap: clamp(0.3rem, 1vw, 0.6rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 40%;
+    min-width: 100px;
+    max-width: 180px;
+  }
+}
+
+/* For very small screens in portrait */
+@media screen and (max-width: 360px) and (orientation: portrait) {
+  .wrong-modal-wrapper {
+    gap: clamp(0.4rem, 1.2vw, 0.8rem);
+    padding: clamp(0.4rem, 1vw, 0.8rem);
+  }
+
+  .wrong-wrapper {
+    gap: clamp(0.2rem, 0.8vw, 0.4rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 45%;
+    min-width: 100px;
+    max-width: 180px;
+  }
+}
+
+/* For very small screens in landscape */
+@media screen and (max-width: 360px) and (orientation: landscape) {
+  .wrong-modal-wrapper {
+    gap: clamp(0.4rem, 1.2vw, 0.8rem);
+    padding: clamp(0.4rem, 1vw, 0.8rem);
+  }
+
+  .wrong-wrapper {
+    gap: clamp(0.2rem, 0.8vw, 0.4rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 35%;
+    min-width: 80px;
+    max-width: 150px;
+  }
+}
+
+/* For very small heights in landscape */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .wrong-modal-wrapper {
+    flex-direction: row;
+    gap: clamp(0.3rem, 1vw, 0.6rem);
+    padding: clamp(0.3rem, 0.8vw, 0.5rem);
+  }
+
+  .wrong-wrapper {
+    gap: clamp(0.2rem, 0.6vw, 0.3rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 30%;
+    min-width: 60px;
+    max-width: 120px;
+  }
+}
+
+/* Update endgame image styles to work with new layout */
+.feedback-modal.failure .endgame-image,
+.game-over-modal.failure .endgame-image {
+  width: clamp(100px, 25vw, 250px);
+  height: auto;
+  object-fit: contain;
+  max-width: 100%;
+  animation: fadeInScale 0.5s ease-out;
+}
+
+/* For large screens */
+@media screen and (min-width: 1920px) {
+  .wrong-modal-wrapper {
+    gap: clamp(1.5rem, 3vw, 3rem);
+    padding: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .wrong-wrapper {
+    gap: clamp(0.8rem, 2vw, 1.5rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: clamp(150px, 20vw, 300px);
+  }
+}
+
+/* For ultra-wide screens */
+@media screen and (min-width: 2560px) {
+  .wrong-modal-wrapper {
+    gap: clamp(2rem, 4vw, 4rem);
+    padding: clamp(2rem, 4vw, 4rem);
+  }
+
+  .wrong-wrapper {
+    gap: clamp(1rem, 2.5vw, 2rem);
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: clamp(200px, 15vw, 350px);
+  }
+}
+
+.gif-message {
+    font-size: clamp(1.2rem, 3vmin, 1.8rem);
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    line-height: 1.4;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+    .gif-message {
+        font-size: clamp(1rem, 2.5vmin, 1.5rem);
+        margin: 0.8rem 0;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .gif-message {
+        font-size: clamp(0.9rem, 2vmin, 1.3rem);
+        margin: 0.6rem 0;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .gif-message {
+        font-size: clamp(0.9rem, 2vmin, 1.3rem);
+        margin: 0.5rem 0;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+/* For large screens */
+@media screen and (min-width: 1920px) {
+    .feedback-modal.failure,
+    .game-over-modal.failure {
+        width: clamp(800px, 80vw, 1200px);
+    }
+
+    .wrong-modal-wrapper {
+        gap: clamp(2rem, 4vw, 4rem);
+        padding: clamp(2rem, 4vw, 4rem);
+    }
+
+    .wrong-wrapper {
+        gap: clamp(1rem, 2.5vw, 2rem);
+    }
+
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(300px, 25vw, 400px);
+    }
+}
+
+/* For ultra-wide screens */
+@media screen and (min-width: 2560px) {
+    .feedback-modal.failure,
+    .game-over-modal.failure {
+        width: clamp(1000px, 85vw, 1400px);
+    }
+
+    .wrong-modal-wrapper {
+        gap: clamp(2.5rem, 5vw, 5rem);
+        padding: clamp(2.5rem, 5vw, 5rem);
+    }
+
+    .wrong-wrapper {
+        gap: clamp(1.2rem, 3vw, 2.5rem);
+    }
+
+    .feedback-modal.failure .endgame-image,
+    .game-over-modal.failure .endgame-image {
+        width: clamp(400px, 30vw, 500px);
+    }
+}
+
+.wrong-modal-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wrong-wrapper {
+    flex: 1;
+    text-align: center;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+    .wrong-modal-wrapper {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .wrong-wrapper {
+        order: 2;
+    }
+
+    .feedback-modal.failure .endgame-image {
+        order: 1;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-aspect-ratio: 1/1) {
+    .wrong-modal-wrapper {
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    .wrong-wrapper {
+        order: 1;
+    }
+
+    .feedback-modal.failure .endgame-image {
+        order: 2;
+    }
+}
+
+/* For very small screens (320x480) */
+@media screen and (max-width: 360px) {
+  .feedback-modal,
+  .game-over-modal {
+    width: 95vw;
+    min-height: auto;
+    max-height: 95vh;
+    padding: 0.5rem;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  .feedback-modal .modal-content,
+  .game-over-modal .modal-content {
+    padding: 0.5rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .feedback-modal h2,
+  .game-over-modal h2 {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    margin-bottom: 0.3rem;
+  }
+
+  .feedback-modal .sub-message,
+  .game-over-modal .sub-message {
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+    margin-bottom: 0.3rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  /* Make buttons horizontal for small screens */
+  .modal-buttons {
+    flex-direction: row;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .game-over-modal .play-again-btn,
+  .game-over-modal .back-home-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    min-height: 32px;
+    min-width: 80px;
+    flex: 1;
+    max-width: 120px;
+  }
+
+  /* Adjust wrong modal layout for small screens */
+  .wrong-modal-wrapper {
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.3rem;
+  }
+
+  .wrong-wrapper {
+    gap: 0.2rem;
+  }
+
+  .feedback-modal.failure .endgame-image,
+  .game-over-modal.failure .endgame-image {
+    width: 45%;
+    min-width: 80px;
+    max-width: 120px;
+  }
+
+  /* Ensure content is visible and not cut off */
+  .feedback-modal.success .modal-content,
+  .game-over-modal.success .modal-content,
+  .feedback-modal.failure .modal-content,
+  .game-over-modal.failure .modal-content {
+    overflow-y: auto;
+    max-height: 90vh;
+    padding: 0.5rem;
+  }
+
+  /* Adjust text sizes for better readability */
+  .gif-message {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    margin: 0.3rem 0;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .game-over-modal .score-display {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    margin: 0.3rem 0;
+  }
+
+  .game-over-modal .score {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+  }
+
+  /* Ensure buttons are always visible */
+  .modal-buttons {
+    position: sticky;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.3rem;
+    margin-top: 0.3rem;
+    z-index: 10;
+  }
+}
+
+/* For very small heights in landscape */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .feedback-modal,
+  .game-over-modal {
+    width: 95vw;
+    min-height: auto;
+    max-height: 95vh;
+    padding: 0.3rem;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+
+  .feedback-modal .modal-content,
+  .game-over-modal .modal-content {
+    padding: 0.3rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-buttons {
+    flex-direction: row;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+  }
+
+  .game-over-modal .play-again-btn,
+  .game-over-modal .back-home-btn {
+    padding: 0.2rem 0.4rem;
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    min-height: 28px;
+    min-width: 70px;
+  }
+}

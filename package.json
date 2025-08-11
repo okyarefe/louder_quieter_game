@@ -1,0 +1,14 @@
+{
+  "name": "loud-game",
+  "version": "1.0.0",
+  "description": "A game about comparing sound levels",
+  "main": "main.js",
+  "scripts": {
+    "generate-questions": "node generateQuestions.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "path": "^0.12.7"
+  }
+} 

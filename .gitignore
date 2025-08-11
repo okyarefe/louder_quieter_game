@@ -1,0 +1,55 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS-specific
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors/IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.history/
+.cache/
+
+# Build/coverage/temp
+dist/
+build/
+coverage/
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Env (keep an example if needed)
+.env
+.env.*
+!.env.example
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# Misc
+*.local
+*.bak
+*.orig
+.cursor/

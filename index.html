@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>    
+   
+    <link rel="stylesheet" href="style.css">
+  
+    
+</head>
+<body>
+    <div class="container">
+        <div class="left-image">
+            <img src="assets/images/Loudest_Football_Stadium_(Ali_Sami_Yen_Istanbul)_131.png" alt="Left image">
+            <div class="item-info">
+                <h3 class="item-name">Loudest Football Stadium (Ali Sami Yen Istanbul)</h3>
+                <p class="item-db">131 dB</p>
+            </div>
+        </div>
+        <div class="right-image">
+            <img src="assets/images/Cow_Mooing_88.png" alt="Right image">
+            <div class="item-info">
+                <h3 class="item-name">Cow Mooing</h3>
+                <p class="item-db">? dB</p>
+                <!-- Game buttons container -->
+                <div class="game-buttons-container">
+                    <button class="game-button louder"><span class="button-label">Louder</span> <span class="button-arrow">&#9650;</span></button>
+                    <button class="game-button quieter"><span class="button-label">Quieter</span> <span class="button-arrow">&#9660;</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="versus-container">
+            <div class="animated-emblem">
+                <img src="assets/NTi-Audio-1500-679.png" alt="NTi Audio Logo">
+            </div>
+        </div>
+        <div class="diagonal-line"></div>
+    </div>
+    <script src="js/utils/questions.js"></script>
+    <script src="js/StorageManager.js"></script>
+    <script src="js/Player.js"></script>
+    <script src="js/Game.js"></script>
+    <script src="js/StartScreen.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        new StartScreen();
+      });
+    </script>
+</body>
+</html>
+
+
